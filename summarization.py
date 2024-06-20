@@ -39,8 +39,8 @@ def add_logo(logo_path, width, height):
 st.title("Annual Report Summary")
 
 # Sidebar with collapsible section for RBI News
-st.sidebar.image(add_logo(logo_path=r"C:\Users\5173707\News\PNBLogo.png", width=175, height=85)) 
-#st.sidebar.markdown('#### Select Banks')
+# st.sidebar.image(add_logo(logo_path=r"C:\Users\5173707\News\PNBLogo.png", width=175, height=85)) 
+# st.sidebar.markdown('#### Select Banks')
 
 #
 import streamlit as st
