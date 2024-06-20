@@ -53,7 +53,7 @@ selected_bank = st.sidebar.radio('',['PNB', 'SBI', 'Indian Bank', 'HDFC'])
 # Display the selected menu item
 st.header(f"Bank : {selected_bank}")
 
-summaries_df= pd.read_csv(r"C:\Users\5173707\Summarization\summaries.csv")
+summaries_df= pd.read_csv("https://raw.githubusercontent.com/bipins-hopstack/pnb_annual_summary/main/summaries.csv?raw=true")
 
 pnb_summary = summaries_df.loc[summaries_df['Bank'] == 'PNB', 'Summary'].values[0]
 sbi_summary = summaries_df.loc[summaries_df['Bank'] == 'SBI', 'Summary'].values[0]
