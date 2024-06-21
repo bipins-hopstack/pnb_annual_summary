@@ -36,44 +36,53 @@ def add_logo(logo_path, width, height):
 
 
 # Streamlit UI
-st.title("Annual Report Summary")
+st.title("Bank Report Summary")
 
 # Sidebar with collapsible section for RBI News
-# st.sidebar.image(add_logo(logo_path=r"C:\Users\5173707\News\PNBLogo.png", width=175, height=85)) 
-# st.sidebar.markdown('#### Select Banks')
+#st.sidebar.image(add_logo(logo_path=r"C:\Users\5173707\News\PNBLogo.png", width=175, height=85)) 
+#st.sidebar.markdown('#### Select Banks')
 
 #
 import streamlit as st
+import pandas as pd
 
 # Sidebar section for menu items
-st.sidebar.title("Select Bank")
-selected_bank = st.sidebar.radio('',['PNB', 'SBI', 'Indian Bank', 'HDFC'])
-#selected_item = st.sidebar.selectbox('Select an Item', Banks[selected_category])
+st.sidebar.title("Select Bank and Report Type")
 
-# Display the selected menu item
-st.header(f"Bank : {selected_bank}")
+# Define the options for banks and report types
+options = [
+    ('PNB', 'Annual Summary'),
+    ('PNB', 'Quarterly Notes'),
+    ('SBI', 'Annual Summary'),
+    ('SBI', 'Quarterly Notes'),
+    ('Indian Bank', 'Annual Summary'),
+    ('Indian Bank', 'Quarterly Notes'),
+    ('HDFC', 'Annual Summary'),
+    ('HDFC', 'Quarterly Notes')
+]
 
-summaries_df= pd.read_csv("https://raw.githubusercontent.com/bipins-hopstack/pnb_annual_summary/main/summaries.csv?raw=true")
+# Create a radio button for selecting the bank and report type
+selected_option = st.sidebar.radio('Select Bank and Report Type', options, format_func=lambda x: f"{x[0]} - {x[1]}")
 
-pnb_summary = summaries_df.loc[summaries_df['Bank'] == 'PNB', 'Summary'].values[0]
-sbi_summary = summaries_df.loc[summaries_df['Bank'] == 'SBI', 'Summary'].values[0]
+# Load the data
+a_summaries_df = pd.read_csv(r"C:\Users\5173707\Summarization\a_summaries.csv")
+q_summaries_df = pd.read_csv(r"C:\Users\5173707\Summarization\q_summaries.csv")
 
-other='''Under Process'''
+# Extract summaries
+summaries = {
+    'annual': {bank: a_summaries_df.loc[a_summaries_df['Bank'] == bank, 'Summary'].values[0] for bank in a_summaries_df['Bank'].unique()},
+    'quarterly': {bank: q_summaries_df.loc[q_summaries_df['Bank'] == bank, 'Summary'].values[0] for bank in q_summaries_df['Bank'].unique()}
+}
 
-SBI='''
+# Display the selected summary
+bank, report_type = selected_option
+st.header(f"{bank} - {report_type}")
 
-'''
+if report_type == 'Annual Summary':
+    st.write(summaries['annual'].get(bank, 'Under Process . . .'))
+elif report_type == 'Quarterly Notes':
+    st.write(summaries['quarterly'].get(bank, 'Under Process . . .'))
 
-if (selected_bank =='PNB'):
-    st.write(f"{pnb_summary}")
-elif(selected_bank=='SBI'):
-    st.write(f"{sbi_summary}")
-else:
-    st.write(f"{other}")
-
-  
-
-# In[ ]:
 
 
 
