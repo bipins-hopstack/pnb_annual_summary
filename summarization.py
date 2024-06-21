@@ -62,11 +62,13 @@ options = [
 ]
 
 # Create a radio button for selecting the bank and report type
+# Sidebar with collapsible section for RBI News
+st.sidebar.image(add_logo(logo_path="PNBLogo.png", width=175, height=85), use_column_width=True)
 selected_option = st.sidebar.radio('Select Bank and Report Type', options, format_func=lambda x: f"{x[0]} - {x[1]}")
 
 # Load the data
-a_summaries_df = pd.read_csv(r"C:\Users\5173707\Summarization\a_summaries.csv")
-q_summaries_df = pd.read_csv(r"C:\Users\5173707\Summarization\q_summaries.csv")
+a_summaries_df = pd.read_csv("https://github.com/bipins-hopstack/pnb_annual_summary/blob/main/a_summaries.csv?raw=true")
+q_summaries_df = pd.read_csv("https://github.com/bipins-hopstack/pnb_annual_summary/blob/main/q_summaries.csv?raw=true")
 
 # Extract summaries
 summaries = {
