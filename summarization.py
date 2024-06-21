@@ -24,7 +24,7 @@ import streamlit as st
 import pandas as pd
 
 # Sidebar section for menu items
-st.sidebar.image(add_logo(logo_path=r"C:\Users\5173707\News\PNBLogo.png", width=175, height=85)) 
+st.sidebar.image(add_logo(logo_path="PNBLogo.png", width=175, height=85)) 
 st.sidebar.title("Select Bank and Report Type")
 
 # Define the options for banks and report types
